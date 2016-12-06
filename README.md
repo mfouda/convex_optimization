@@ -30,3 +30,8 @@ model.plot()
 放大局部看：
 ![Fig2](./proximal_part.png)
 smoothed 方法的结果与 Proximal 类似，不再展示。
+
+---
+###结果分析
+1. 首先，加速后的算法（不管是 smoothed 还是 proximal ）的达到收敛条件需要的迭代次数明显的小于一般的方法，且结束训练时，加速后的算法结果明显优于一般的方法。这一点与老师 smoothing 课件中几种方法收敛速度的比较结果是相符合的。
+2. smoothed 的方法比 proximal 的方法慢。这其中一方面是因为 smoothed 在迭代更新 $x$ 时需要更多地矩阵运算，我自己对于代码中的矩阵运算没有进一步优化。另一方面是因为，在理论上，当 smoothed function $h_a(x)$ 的 a 趋于 0 时， smoothed function 越来越逼近于 subgradient 方法。我在代码中取的 $a=10^{(-6)}$，所以 smoothed 方法的收敛速度近似于 Subgradient 方法。而 subgradient 方法的收敛是 proximal 方法的平方倍。综上两点是我认为 “smoothed 的方法比 proximal 的方法慢”的原因。
